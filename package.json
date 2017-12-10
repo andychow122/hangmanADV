@@ -1,0 +1,25 @@
+{
+  "name": "hmadv-package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.js",
+  "dependencies": {
+    "inquirer": "^4.0.1",
+    "is-letter": "^1.1.1",
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andychow122/hangmanADV.git"
+  },
+  "author": "Andy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andychow122/hangmanADV/issues"
+  },
+  "homepage": "https://github.com/andychow122/hangmanADV#readme"
+}
