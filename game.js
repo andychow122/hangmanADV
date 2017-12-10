@@ -36,19 +36,15 @@ function startGame() {
 	console.log("GAME HAS STARTED" + "\nTHE GAME IS HANGMAN." + "\nYOU HAVE 9 GUESSES TO WIN." + "\nGOOD LUCK" + "\n-------------------");
     var newWord = new word.Word(words[Math.floor(Math.random()*words.length)]);
 	// console.log(newWord); showing object
-
-
-	while (guessesLeft > 0) {
-		console.log("Guesses Left: " + guessesLeft);
-		console.log("Incorrect Guesses: " + newWord.printGuesses());
-		console.log("Word: " + newWord.printWord());
-		inquireGuess(newWord);
-	}
-
+	inquireGuess(newWord, guessesLeft);
 	
 }
 
-function inquireGuess(newWord) {
+function inquireGuess(newWord, guessesLeft) {
+	console.log("Guesses Left: " + guessesLeft);
+	console.log("Incorrect Guesses: " + newWord.printGuesses());
+	console.log("Word: " + newWord.printWord());
+	
 	inquirer.prompt({
 			name: "guess",
 			message: "Please guess a letter."
@@ -56,22 +52,25 @@ function inquireGuess(newWord) {
 			var res = newWord.checkLetters(answer.guess);
 			if (res === newWord.incorrect){
 				guessesLeft--;
-				checkGuesses(guessesLeft);
+				if (guessesLeft === 0) {
+					console.log("Ouch, maybe you'll get it next time. The word was: " + newWord.word);
+					inquireStart();
+					return;
+				}
 			} else if (res === newWord.correct){
 				if (newWord.isComplete()) {
-					console.log("YOU WIN");
+					console.log("YOU WIN! The word was: " + newWord.word);
 					inquireStart();
+					return;
 				}
 			}
+			inquireGuess(newWord, guessesLeft);
 		});
 }
 
 function checkGuesses(guessesLeft) {
 
-	if (guessesLeft === 0) {
-		console.log("Ouch, maybe you'll get it next time.");
-		inquireStart();
-	}
+	
 }
 
 inquireStart();
